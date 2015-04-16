@@ -1,0 +1,29 @@
+{
+    "name": "webosc",
+    "version": "0.0.1-15",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "Pral2a",
+    "license": "",
+    "bugs": {
+        "url": ""
+    },
+    "homepage": "",
+    "engines": {
+        "node": "0.10.x"
+    },
+    "dependencies": {
+        "express": "4.10.1",
+        "socket.io": "1.2.0",
+        "colors": "1.0.3",
+        "osc-min": "0.2.0"
+    }
+}

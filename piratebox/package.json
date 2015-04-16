@@ -1,0 +1,26 @@
+{
+  "name": "piratebox",
+  "version": "1.0.0",
+  "description": "piratebox running on node.js for the secret school",
+  "main": "piratebox.js",
+  "dependencies": {
+    "formidable": "^1.0.17",
+    "mime": "^1.3.4",
+    "osc-min": "^0.2.0",
+    "url": "^0.10.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dakodeon/piratebox.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dakodeon/piratebox/issues"
+  },
+  "homepage": "https://github.com/dakodeon/piratebox"
+}
