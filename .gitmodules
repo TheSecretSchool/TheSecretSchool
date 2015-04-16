@@ -1,6 +1,3 @@
-[submodule "piratebox"]
-	path = piratebox
-	url = https://github.com/dakodeon/piratebox.git
-[submodule "sc-kubik"]
-	path = sc-kubik
-	url = https://github.com/dakodeon/sc-kubik.git
+[submodule "performigrations"]
+	path = performigrations
+	url = https://github.com/iani/performigrations.git

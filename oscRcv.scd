@@ -29,7 +29,7 @@ OSCdef(\sld5, {
 	| args |
 	args.postln;
 }, "/slider5");
- )
+)
 
 // send OSC to piratebox
 
