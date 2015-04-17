@@ -81,9 +81,11 @@ window.onload = function() {
     chatInit();
     // *** If there is a url parameter, create a link back to the wiki and create a subtitle. -- TODO: Display the photo instead of the upload section
     if (photoID != "") {
+	addr = addr.replace("<<<", "#");
+	alert(addr);
 	document.getElementById("title").innerHTML += 'Now commenting on ' + photoID + '.<br/>';
-	document.getElementById("sendBtn").innerHTML += '<a style="padding-left:5%;" href="http://192.168.77.1:8181/' + addr + '">Go back to ' + photoID + ' in Wiki.</a>'
-	document.getElementById("text").innerHTML = "<p style='text-align:center;'><strong>" + photoID + "</strong><br />Image goes here.</p>"
+	document.getElementById("sendBtn").innerHTML += '<a style="padding-left:5%;" href="' + addr + '">Go back to ' + photoID + ' in Wiki.</a>';
+	document.getElementById("text").innerHTML = "<p style='text-align:center;'><strong>" + photoID + "</strong><br />Image goes here.</p>";
     }
     chatReload = window.setInterval( xmlhttpGet, 5000 );
 };

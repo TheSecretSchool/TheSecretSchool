@@ -33,6 +33,7 @@ oscEmmiter = udp.createSocket("udp4");
 
 io.on('connection', function (websocket) {
     clientsConnected++;
+    console.log("A client just connected."); // for debugging
 
     io.sockets.emit('users', clientsConnected);
 
@@ -51,12 +52,12 @@ io.on('connection', function (websocket) {
 });
 
 http.listen(config.http.port.in, function () {
-    console.log(colors.rainbow("beloi OSC: " + config.http.port.in));
+    console.log(colors.rainbow("The Secret School main server: " + config.http.port.in));
 });
 
 process.on('exit', function(code) {
     oscListener.close();
     oscEmmiter.close();
     http.close();
-    console.log(colors.rainbow("Quitting beloi OSC"));
+    console.log(colors.rainbow("Quitting Secret School"));
 });
