@@ -39,6 +39,7 @@ io.on('connection', function (websocket) {
 
     websocket.on('osc', function (msg) {
         var buf = osc.toBuffer(msg); // Must add a  real buffer. Check also JSON decoding.
+	io.sockets.emit('message', "Data!!!"); // test tiddly connection
         console.log(colors.blue("Browser > OSC: " + JSON.stringify(msg)));
         oscEmmiter.send(buf, 0, buf.length, config.osc.port.out, config.osc.address);
     });
