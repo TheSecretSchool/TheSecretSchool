@@ -1,3 +1,4 @@
+
 // *** Extract information out of the URL query string
 var photoID = getParameterByName("id");
 var addr = getParameterByName("addr");
@@ -58,9 +59,12 @@ function xmlhttpPost(strURL) {
             color = form.color[i].value;
         }
     }
-    // *** If there is an id parameter, include comment notification in the message.
+    // *** If there is an id parameter, include image thumbnail in the message.
     if (photoID != "") {
-	self.xmlHttpReq.send( 'name=' + escape( form.name.value ) + '&entry=' + escape( form.entry.value ) + ' <small>(comment on ' + photoID + ')</small>' + '&color=' + escape( color ) );
+	var slashPos = imgPath.lastIndexOf('/');
+	var newPath = imgPath.slice(0, slashPos) + "-thumbnails" + imgPath.slice(slashPos, imgPath.length);
+	
+	self.xmlHttpReq.send( 'name=' + escape( form.name.value ) + '&entry=' + escape( form.entry.value ) + '<br><img src="' + newPath + '">' + '&color=' + escape( color ) );
     }
     else {
 	self.xmlHttpReq.send( 'name=' + escape( form.name.value ) + '&entry=' + escape( form.entry.value ) + '&color=' + escape( color ) );
@@ -88,14 +92,14 @@ function chatInit() {
 
 window.onload = function() {
     chatInit();
-    // *** If there is a url parameter, create a link back to the wiki and create a subtitle. -- TODO: Display the photo instead of the upload section
+    
+    // *** If there is a url parameter, create a link back to the wiki and create a subtitle
     if (photoID != "") {
 	addr = addr.replace("<<<", "#");
-	alert(imgPath);
-
+	
 	document.getElementById("title").innerHTML += 'Now commenting on ' + photoID + '.<br/>';
-	document.getElementById("sendBtn").innerHTML += '<a style="margin-left:5%;" href="' + addr + '">Go back to Wiki.</a>';
-	document.getElementById("text").innerHTML = "<p style='margin-left:5%'><strong>" + photoID + "</strong><br /></p><img style='" + dimension + ":82" + mp + ";min-" + dimension + ":400px;margin:5%;' src='" + imgPath + "'>";
+//	document.getElementById("sendBtn").innerHTML += '<a style="margin-left:5%;" href="' + addr + '">Go back to Wiki.</a>';
+	document.getElementById("text").innerHTML = "<p style='margin-left:5%'><strong>" + photoID + "</strong><span style='margin-left:20%;'><a href='" + addr + "'>Go back to Wiki.</a><br /></p><img style='" + dimension + ":81" + mp + ";min-" + dimension + ":400px;margin:5%;' src='" + imgPath + "'>";
     }
     chatReload = window.setInterval( xmlhttpGet, 5000 );
 };
