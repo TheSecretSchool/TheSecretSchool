@@ -1,0 +1,42 @@
+* SOME NOTES ON THE INTERCONNECTION
+
+** NAVIGATION INSIDE OF TIDDLYWIKI
+
+*** CONTENT TIDDLERS
+Each picture is connected with a subtitle.
+
+Each picture, subtitle, video and audio or text extract are connected
+between them with keywords.
+
+When you click on a keyword, a random picture with this keyword
+appears, its subtitle gets posted in the chatroom (with wat username
+and color?), and a random audio extract is played in the main
+speakers.
+
+When you click on a picture, gou get redirected to another picture,
+video or audio with the same tag. This keeps on going.
+
+- NOTES:
+-- Maybe add a function to exclude a keyword from selection if it was used to get to the present picture (to add more diversity)
+-- Check what happens on tiddlyWiki with audio and video -- can we
+have clickable elements?
+
+*** TEXT MATERIAL
+
+There are four (or five) text materials up until now:
+1. Roussel's poem
+2. Papadiamantis' text
+3. Alexis' journal
+4. Video transcriptions
+5. (Maybe) Interview transcriptions
+
+-- Possible use: Each phrase of the texts will be a clickable
+   link. When you click on a phrase, a search engine searches for
+   keywords present in this phrase and a picture, video or audio with
+   this keyword appears.
+
+-- To think of: Text interconnection
+
+-- Another idea: Text extracts can be used for picture subtitles, so,
+   when you click on this picture there is a chance that the whole
+   text appears.
