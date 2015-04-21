@@ -28,7 +28,7 @@ function xmlhttpGet() {
 //    self.xmlHttpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     self.xmlHttpReq.onreadystatechange = function() {
         if (self.xmlHttpReq.readyState == 4) {
-            document.getElementById("chattext").innerHTML = '<p><strong>Messages:</strong></p>' + self.xmlHttpReq.responseText;
+            document.getElementById("chattext").innerHTML = "<br />" + self.xmlHttpReq.responseText;
         }
     }
     self.xmlHttpReq.send();
@@ -69,7 +69,7 @@ function xmlhttpPost(strURL) {
 	// *** TODO: randomize also the position of the text
 	var position = Math.floor(Math.random()*60);
 	
-	self.xmlHttpReq.send( 'name=' + escape( form.name.value ) + '&entry=' + escape( form.entry.value ) + '</span><br><img style="margin-left:' + "60" + '%;' + dimension + ':30%;min-' + dimension + ':110px;max-' + dimension + ':150px" src="' + newPath + '">' + '&color=' + escape( color ) );
+	self.xmlHttpReq.send( 'name=' + escape( form.name.value ) + '&entry=' + escape( form.entry.value ) + '</span><br><img style="margin-left:' + position + '%;' + dimension + ':20' + 'vw' + ';min-' + dimension + ':110px;max-' + dimension + ':150px" src="' + newPath + '">' + '&color=' + escape( color ) );
     }
     else {
 	self.xmlHttpReq.send( 'name=' + escape( form.name.value ) + '&entry=' + escape( form.entry.value ) + '&color=' + escape( color ) );
@@ -90,7 +90,7 @@ function chatInit() {
 '<form action="/chat" method="post" enctype="application/x-www-form-urlencoded" name="chat"><br>' +
 '<input name="name" type="text" value="Anonymous" placeholder="Nickname"><br>' + '<textarea name="entry" wrap="virtual" placeholder="Message..." cols="30"></textarea><br>' +
 '<input type="radio" value="black" name="color" checked>B<input type="radio" value="blue" name="color"><font color="blue">B</font><input type="radio" value="green" name="color"><font color="green">G</font><input type="radio" value="orange" name="color"><font color="orange">O</font><input type="radio" value="red" name="color"><font color="red">R</font></strong><br>' +
-'<div id="sendBtn"><input value="Send" type="button" onclick=\'JavaScript:xmlhttpPost("/chat")\'></div>' +
+'<div id="sendBtn"><input value="Post" type="button" onclick=\'JavaScript:xmlhttpPost("/chat")\'></div>' +
 '</form><hr>';
     xmlhttpGet();
 }
@@ -103,8 +103,8 @@ window.onload = function() {
 	addr = addr.replace("<<<", "#");
 	
 	document.getElementById("title").innerHTML += 'Now commenting on ' + photoID + '.<br/>';
-//	document.getElementById("sendBtn").innerHTML += '<a style="margin-left:5%;" href="' + addr + '">Go back to Wiki.</a>';
-	document.getElementById("text").innerHTML = "<p style='margin-left:5%'><strong>" + photoID + "</strong><span style='margin-left:20%;'><a href='" + addr + "'>Go back to Wiki.</a><br /></p><img style='" + dimension + ":80" + mp + ";min-" + dimension + ":400px;margin:5%;' src='" + imgPath + "'>";
+
+	document.getElementById("text").innerHTML = "<p style='margin-left:5%'><strong>" + photoID + "</strong><span style='margin-left:20%;'><a href='" + addr + "'>Go back to Wiki.</a><br /></p><img style='" + dimension + ":50" + mp + ";min-" + dimension + ":400px;margin:5%;' src='" + imgPath + "'>";
     }
     chatReload = window.setInterval( xmlhttpGet, 5000 );
 };

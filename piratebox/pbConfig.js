@@ -10,7 +10,7 @@ exports.WEBROOT = process.cwd() + '/web';
 // exports.pbWEBROOT = process.cwd() + '/piratebox/web'; // same as above
 
 // chat text file
-exports.CHATFILE = process.cwd() + '/chat.txt';
+exports.CHATFILE = process.cwd() + '/chat.html';
 
 // port on which the http server runs
 exports.SERVERPORT = 8686;
