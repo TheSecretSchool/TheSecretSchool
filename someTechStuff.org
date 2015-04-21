@@ -1,0 +1,21 @@
+* SOME TECH STUFF ABOUT THE SECRET SCHOOL PROJECT
+
+The =Secret School Project= consists of two Raspberry Pis communicating with each other with an ethernet cable.
+
+** THE SERVER
+
+The first Raspberry Pi is the =Server= and acts as the main server of the =Secret School= website. It starts two =Node.js= servers, one is the main server and the other is the =PirateBox= server. Its Ethernet is configured with a static IP of =192.168.137.126=. Alongside with the Ethernet connection, it also starts the =Secret School= network via WiFi, which is running with an IP of =192.168.77.1=. The hostname is =secretschool=.
+
+One can access the =Server= by connecting to the =Secret School= network and using the =ssh= protocol as user =pi= and with the default password (=raspberry=).
+
+The =Server= is configured to initiate the two =Node.js= servers upon booting. This is done with two scripts inside =path/to/init.d= called =script1 name= and =script2 name=. If the server fails, one should execute =command to stop and start (or maybe immediatly reboot?)=.
+
+The =Server= is also configured to automatically boot into an LXDE desktop session (as the =pi= user), which automatically starts the =Epiphany Web Browser=, and the homepage of =Secret School= (=http://secretschool=).
+
+** THE CLIENT
+
+The second Raspberry Pi is the =Client= (due to lack of better name). It runs =SuperCollider= and its role is to receive the OSC messages sent by the =Server=, process them, play the according sound and redistribute some messages back to the =Server=. The =Client= is responsible for displaying some important elements in the =Secret School= webpage. Its Ethernet connection is configured with a static IP of =192.168.137.125=.
+
+The =Client= can be accessed only through the =Server= by using the =ssh= protocol with username =pi= and the default password (=raspberry=).
+
+...

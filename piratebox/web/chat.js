@@ -4,6 +4,7 @@ var photoID = getParameterByName("id");
 var addr = getParameterByName("addr");
 var imgPath = getParameterByName("imgPath");
 var dimension = getParameterByName("dim")
+
 // *** variable to determine the measure points of the image
 if (dimension == "width") {
     var mp = "vw";
@@ -61,10 +62,14 @@ function xmlhttpPost(strURL) {
     }
     // *** If there is an id parameter, include image thumbnail in the message.
     if (photoID != "") {
+	// *** Compute the thumbnail path from the photo path
 	var slashPos = imgPath.lastIndexOf('/');
 	var newPath = imgPath.slice(0, slashPos) + "-thumbnails" + imgPath.slice(slashPos, imgPath.length);
+	// *** randomize the position of the image
+	// *** TODO: randomize also the position of the text
+	var position = Math.floor(Math.random()*60);
 	
-	self.xmlHttpReq.send( 'name=' + escape( form.name.value ) + '&entry=' + escape( form.entry.value ) + '<br><img src="' + newPath + '">' + '&color=' + escape( color ) );
+	self.xmlHttpReq.send( 'name=' + escape( form.name.value ) + '&entry=' + escape( form.entry.value ) + '</span><br><img style="margin-left:' + "60" + '%;' + dimension + ':30%;min-' + dimension + ':110px;max-' + dimension + ':150px" src="' + newPath + '">' + '&color=' + escape( color ) );
     }
     else {
 	self.xmlHttpReq.send( 'name=' + escape( form.name.value ) + '&entry=' + escape( form.entry.value ) + '&color=' + escape( color ) );
@@ -99,7 +104,7 @@ window.onload = function() {
 	
 	document.getElementById("title").innerHTML += 'Now commenting on ' + photoID + '.<br/>';
 //	document.getElementById("sendBtn").innerHTML += '<a style="margin-left:5%;" href="' + addr + '">Go back to Wiki.</a>';
-	document.getElementById("text").innerHTML = "<p style='margin-left:5%'><strong>" + photoID + "</strong><span style='margin-left:20%;'><a href='" + addr + "'>Go back to Wiki.</a><br /></p><img style='" + dimension + ":81" + mp + ";min-" + dimension + ":400px;margin:5%;' src='" + imgPath + "'>";
+	document.getElementById("text").innerHTML = "<p style='margin-left:5%'><strong>" + photoID + "</strong><span style='margin-left:20%;'><a href='" + addr + "'>Go back to Wiki.</a><br /></p><img style='" + dimension + ":80" + mp + ";min-" + dimension + ":400px;margin:5%;' src='" + imgPath + "'>";
     }
     chatReload = window.setInterval( xmlhttpGet, 5000 );
 };
