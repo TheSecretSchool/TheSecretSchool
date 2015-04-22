@@ -61,6 +61,5 @@ function oscSlider(oscPath, min, max) {
         }
     });
 
-
     //missing bidirectional control
 }

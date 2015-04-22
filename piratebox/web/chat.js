@@ -101,7 +101,7 @@ window.onload = function() {
     // *** If there is a url parameter, create a link back to the wiki and create a subtitle
     if (photoID != "") {
 	addr = addr.replace("<<<", "#");
-	alert(addr);
+	// alert(addr); // If u ever need to know...
 	document.getElementById("title").innerHTML += 'Now commenting on ' + photoID + '.<br/>';
 
 	document.getElementById("text").innerHTML = "<p style='margin-left:5%'><strong>" + photoID + "</strong><span style='margin-left:20%;'><a href='" + addr + "'>Go back to Wiki.</a><br /></p><img style='" + dimension + ":50" + mp + ";min-" + dimension + ":400px;margin:5%;' src='" + imgPath + "'>";
