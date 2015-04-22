@@ -24,15 +24,15 @@ oscListener = udp.createSocket("udp4", function(buf, rinfo) {
     var msg = osc.fromBuffer(buf);
     // *** Sending message to specific tiddly socket if the address is /url
     if (msg.address == "/url") {
-	console.log("OSC > Browser: " + msg.address + ": " + msg.args[0].value);
+	console.log("OSC > Browser: " + msg.address + ": " + msg.args[0].value + " | " + msg.args[1].value);
 	// *** Alternate way - didn't work
 	// io.to(msg.args[0].value).emit('message', 'Hey Bro!');
 	if (io.sockets.connected[msg.args[0].value]) {
-	    io.sockets.connected[msg.args[0].value].emit('message', 'for your eyes only');
+	    io.sockets.connected[msg.args[0].value].emit('message', msg.args[1].value);
 	}
     }
     // console.log(colors.green("OSC > Browser: " + JSON.stringify(msg)));
-    io.sockets.emit('message', msg.address);
+    
   // } catch (e) {
   //   return console.log(colors.red("invalid OSC packet:" + e));
   // }
@@ -49,15 +49,34 @@ io.on('connection', function (websocket) {
     clientsConnected++;
     io.sockets.emit('users', clientsConnected);
 
-    // *** debugging -- send socket ID to supercollider
-    var idOsc = {
-                address: '/tiddler',
-                args: [
-                    websocket.id
-                ]
-            };
-    idOsc = osc.toBuffer(idOsc);
-    oscEmmiter.send(idOsc, 0, idOsc.length, config.osc.port.out, "192.168.77.122"); // *** the IP will probably need to change
+    // // *** debugging -- send socket ID to supercollider
+    // var idOsc = {
+    //     address: '/tiddler',
+    //     args: [
+    //         websocket.id
+    //     ]
+    // };
+    // idOsc = osc.toBuffer(idOsc);
+    // oscEmmiter.send(idOsc, 0, idOsc.length, config.osc.port.out, "192.168.77.122"); // *** the IP will probably need to change
+
+    // *** Receive keyword info from tiddlywiki
+    websocket.on('keyword', function (msg) {
+	console.log(websocket.id + " | " + msg.key + " | " + msg.url);
+
+	// *** Make the info an OSC message containing socket ID
+	var keyOsc = {
+	    address: '/tiddlyKey',
+	    args: [
+		websocket.id,
+		msg.key,
+		msg.url
+	    ]
+	};
+	//console.log(JSON.stringify(keyOsc));
+	
+	keyOsc = osc.toBuffer(keyOsc);
+	oscEmmiter.send(keyOsc, 0, keyOsc.length, config.osc.port.out, config.osc.address);
+    });
     
     websocket.on('osc', function (msg) {
         var buf = osc.toBuffer(msg); // Must add a  real buffer. Check also JSON decoding.
