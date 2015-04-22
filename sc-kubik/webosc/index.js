@@ -18,10 +18,14 @@ var clientsConnected = 0;
 
 app.use(express.static(__dirname + '/public'));
 
-oscListener = udp.createSocket("udp4", function(msg, rinfo) {
+oscListener = udp.createSocket("udp4", function(buf, rinfo) {
   // try {
-    io.sockets.emit('osc', osc.fromBuffer(msg));
-    console.log(colors.green("OSC > Browser: " + JSON.stringify(msg)));
+    //io.sockets.emit('osc', osc.fromBuffer(msg));
+    var msg = osc.fromBuffer(buf);
+    // *** Sending message to tiddly upon receiving OSC
+    console.log("OSC > Browser: " + msg.address);
+    // console.log(colors.green("OSC > Browser: " + JSON.stringify(msg)));
+    io.sockets.emit('message', msg.address);
   // } catch (e) {
   //   return console.log(colors.red("invalid OSC packet:" + e));
   // }
@@ -39,7 +43,7 @@ io.on('connection', function (websocket) {
 
     websocket.on('osc', function (msg) {
         var buf = osc.toBuffer(msg); // Must add a  real buffer. Check also JSON decoding.
-	io.sockets.emit('message', "Data!!!"); // test tiddly connection
+	io.sockets.emit('message', "Data"); // test tiddly connection
         console.log(colors.blue("Browser > OSC: " + JSON.stringify(msg)));
         oscEmmiter.send(buf, 0, buf.length, config.osc.port.out, config.osc.address);
     });
