@@ -16,5 +16,5 @@ exports.PAGENOFILES = '<p style="padding-left:5%;"><strong>Currently there are n
 
 exports.PAGEFTP = '<p>Additionally this PirateBox is accessible by <a href="ftp://piratebox/">FTP</a></p>';
 
-exports.CHATENTRY = "<span style='color: #COLOR#;'><b>#NAME#:</b> #ENTRY#<br>\n";
+exports.CHATENTRY = "<span style='color:#COLOR#;margin-right:#POSITION#;'> #ENTRY#<br>\n";
 

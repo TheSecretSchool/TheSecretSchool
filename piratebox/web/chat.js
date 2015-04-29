@@ -49,7 +49,7 @@ function xmlhttpPost(strURL) {
     self.xmlHttpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     self.xmlHttpReq.onreadystatechange = function() {
         if (self.xmlHttpReq.readyState == 4) {
-            document.getElementById("chattext").innerHTML = /*'<p><strong>Messages:</strong></p>' +*/ self.xmlHttpReq.responseText;
+            document.getElementById("chattext").innerHTML =  self.xmlHttpReq.responseText;
 
         }
     }
@@ -66,13 +66,12 @@ function xmlhttpPost(strURL) {
 	var slashPos = imgPath.lastIndexOf('/');
 	var newPath = imgPath.slice(0, slashPos) + "-thumbnails" + imgPath.slice(slashPos, imgPath.length);
 	// *** randomize the position of the image
-	// *** TODO: randomize also the position of the text
 	var position = Math.floor(Math.random()*60);
 	
-	self.xmlHttpReq.send( 'name=' + escape( form.name.value ) + '&entry=' + escape( form.entry.value ) + '</span><br><img style="margin-left:' + position + '%;' + dimension + ':20' + 'vw' + ';min-' + dimension + ':110px;max-' + dimension + ':150px" src="' + newPath + '">' + '&color=' + escape( color ) );
+	self.xmlHttpReq.send( '&entry=' + escape( form.entry.value ) + '</span><br><img style="margin-left:' + position + '%;' + dimension + ':20' + 'vw' + ';min-' + dimension + ':110px;max-' + dimension + ':150px" src="' + newPath + '">' + '&color=' + escape( color ) );
     }
     else {
-	self.xmlHttpReq.send( 'name=' + escape( form.name.value ) + '&entry=' + escape( form.entry.value ) + '&color=' + escape( color ) );
+	self.xmlHttpReq.send( '&entry=' + escape( form.entry.value ) + '&color=' + escape( color ) );
     }
     form.entry.value = "";
 }
@@ -88,7 +87,7 @@ function getParameterByName(name) {
 function chatInit() {
     document.getElementById("chatform").innerHTML = '<div id="title"><strong>Pirate<span style="color: maroon;">ShoutBox</span></strong><br></div>' + 
 '<form action="/chat" method="post" enctype="application/x-www-form-urlencoded" name="chat"><br>' +
-'<input name="name" type="text" value="Anonymous" placeholder="Nickname"><br>' + '<textarea name="entry" wrap="virtual" placeholder="Message..." cols="30"></textarea><br>' +
+'<textarea name="entry" wrap="virtual" placeholder="Message..." cols="30"></textarea><br>' +
 '<input type="radio" value="black" name="color" checked>B<input type="radio" value="blue" name="color"><font color="blue">B</font><input type="radio" value="green" name="color"><font color="green">G</font><input type="radio" value="orange" name="color"><font color="orange">O</font><input type="radio" value="red" name="color"><font color="red">R</font></strong><br>' +
 '<div id="sendBtn"><input value="Post" type="button" onclick=\'JavaScript:xmlhttpPost("/chat")\'></div>' +
 '</form><hr>';

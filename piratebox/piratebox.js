@@ -39,7 +39,7 @@ var oscListener = udp.createSocket("udp4", function(buf, rinfo) {
     console.log("OSC message received: " + msg.address + " | " +   msg.args[0].value + ": " + msg.args[1].value);
     // *** create a chat entry from OSC messages with address "chatPost"
     if (msg.address == "/chatPost") {
-	pbChat.post( msg.args[0].value, msg.args[1].value, msg.args[2].value );
+	pbChat.post( msg.args[1].value, msg.args[2].value );
 	pbChat.display();
     }
 });
@@ -133,15 +133,15 @@ form.parse(request, function(err, fields, files) {
             if(err) {
                 util.log(err + ' (during chat save)');
             } else {
-                pbChat.post( fields.name, fields.entry, fields.color );
+                pbChat.post( fields.entry, fields.color );
 		// *** create and send the OSC message
 		// *** TODO: send also time info using Date()
 		var msg = {
 		    address: '/chatMsg',
-		    args: [ fields.name, fields.entry, fields.color ]
+		    args: [ fields.entry, fields.color ]
 		};
 		var buf = osc.toBuffer(msg);
-		console.log("Chat Message: " + fields.name + ": " + fields.entry);
+		console.log("Chat Message: " + fields.entry);
 		oscEmmiter.send(buf, 0, buf.length, oscConf.port.out, oscConf.address);
                 res.writeHead(200, {'content-type': 'text/html'});
                 res.end( pbChat.display() );
