@@ -71,7 +71,7 @@ function xmlhttpPost(strURL) {
 	self.xmlHttpReq.send( '&entry=' + escape( form.entry.value ) + '</span><br><img style="margin-left:' + position + '%;' + dimension + ':20' + 'vw' + ';min-' + dimension + ':110px;max-' + dimension + ':150px" src="' + newPath + '">' + '&color=' + escape( color ) );
     }
     else {
-	self.xmlHttpReq.send( '&entry=' + escape( form.entry.value ) + '&color=' + escape( color ) );
+	self.xmlHttpReq.send( '&entry=' + escape( form.entry.value ) + '</span>' + '&color=' + escape( color ) );
     }
     form.entry.value = "";
 }
