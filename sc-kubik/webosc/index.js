@@ -59,23 +59,39 @@ io.on('connection', function (websocket) {
     // idOsc = osc.toBuffer(idOsc);
     // oscEmmiter.send(idOsc, 0, idOsc.length, config.osc.port.out, "192.168.77.122"); // *** the IP will probably need to change
 
-    // *** Receive keyword info from tiddlywiki
-    websocket.on('keyword', function (msg) {
-	console.log(websocket.id + " | " + msg.key + " | " + msg.url);
+    // *** Receive info from tiddlywiki
+    websocket.on('tiddler info', function (msg) {
+	console.log(websocket.id + " | " + msg.type + " | " + msg.val + " | " + msg.url);
 
-	// *** Make the info an OSC message containing socket ID
-	var keyOsc = {
-	    address: '/tiddlyKey',
-	    args: [
-		websocket.id,
-		msg.key,
-		msg.url
-	    ]
-	};
-	//console.log(JSON.stringify(keyOsc));
+	// *** Determine if the value of the message refers to keyword or title and send the according message to SC
+	if (msg.type == "key") {
+
+	    // *** Make the info a keyword OSC
+	    var infosc = {
+		address: '/tiddlyKey',
+		args: [
+		    websocket.id,
+		    msg.val,
+		    msg.url
+		]
+	    };
+	}
+	else if (msg.type == "title") {
+
+	    // *** Make the info a title OSC
+	    var infosc = {
+		address: '/tiddlyTitle',
+		args: [
+		    websocket.id,
+		    msg.val,
+		    msg.url
+		]
+	    };
+	}
+	else { console.log("Error: Invalid type!!!"); }
 	
-	keyOsc = osc.toBuffer(keyOsc);
-	oscEmmiter.send(keyOsc, 0, keyOsc.length, config.osc.port.out, config.osc.address);
+	infosc = osc.toBuffer(infosc);
+	oscEmmiter.send(infosc, 0, infosc.length, config.osc.port.out, config.osc.address);
     });
     
     websocket.on('osc', function (msg) {

@@ -21,7 +21,7 @@ exports.save = function( init ) {
         if( path.existsSync( pbConfig.CHATFILE ) == true ) {
             this.chatlog = fs.readFileSync( pbConfig.CHATFILE, 'utf8' );
         } else {
-            this.chatlog = exports.createChatEntry( 'Pirate<span style="color: maroon;">Box</span>', 'Chat and share files anonymously!', 'black' );
+            this.chatlog = exports.createChatEntry( 'Secret<span style="color: maroon;">School</span>', 'Evolving memory in a suitcase', 'black' );
             fs.writeFileSync( pbConfig.CHATFILE, this.chatlog , 'utf8' );
         }
         return false;

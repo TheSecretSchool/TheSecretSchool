@@ -49,7 +49,7 @@ function xmlhttpPost(strURL) {
     self.xmlHttpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     self.xmlHttpReq.onreadystatechange = function() {
         if (self.xmlHttpReq.readyState == 4) {
-            document.getElementById("chattext").innerHTML = '<p><strong>Messages:</strong></p>' + self.xmlHttpReq.responseText;
+            document.getElementById("chattext").innerHTML = /*'<p><strong>Messages:</strong></p>' +*/ self.xmlHttpReq.responseText;
 
         }
     }
