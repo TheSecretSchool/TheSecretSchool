@@ -1,7 +1,10 @@
-
 // *** Extract information out of the URL query string
 var photoID = getParameterByName("id");
 var addr = getParameterByName("addr");
+if (addr == "") { addr = "http://secretschool" }
+addr = addr.replace("<<<", "#");
+// alert(addr); // If u ever need to know...
+
 var imgPath = getParameterByName("imgPath");
 var dimension = getParameterByName("dim")
 
@@ -85,10 +88,10 @@ function getParameterByName(name) {
 }
 
 function chatInit() {
-    document.getElementById("chatform").innerHTML = '<div id="title"><strong>Pirate<span style="color: maroon;">ShoutBox</span></strong><br></div>' + 
+    document.getElementById("chatform").innerHTML = '<hr><div id="title"><span style="float:right;">Go to the <a href="' + addr + '"><strong>Secret<span style="color:maroon;">School</span> HomePage</strong></a></span><br></div><hr>' + 
 '<form action="/chat" method="post" enctype="application/x-www-form-urlencoded" name="chat"><br>' +
 '<textarea name="entry" wrap="virtual" placeholder="Message..." cols="30"></textarea><br>' +
-'<input type="radio" value="black" name="color" checked>B<input type="radio" value="blue" name="color"><font color="blue">B</font><input type="radio" value="green" name="color"><font color="green">G</font><input type="radio" value="orange" name="color"><font color="orange">O</font><input type="radio" value="red" name="color"><font color="red">R</font></strong><br>' +
+'<input type="radio" value="black" name="color" checked>B</font><input type="radio" value="grey" name="color"><font color="grey">G</font><input type="radio" value="maroon" name="color"><font color="maroon">R</font></strong><br>' +
 '<div id="sendBtn"><input value="Post" type="button" onclick=\'JavaScript:xmlhttpPost("/chat")\'></div>' +
 '</form><hr>';
     xmlhttpGet();
@@ -99,11 +102,7 @@ window.onload = function() {
     
     // *** If there is a url parameter, create a link back to the wiki and create a subtitle
     if (photoID != "") {
-	addr = addr.replace("<<<", "#");
-	// alert(addr); // If u ever need to know...
-	document.getElementById("title").innerHTML += 'Now commenting on ' + photoID + '.<br/>';
-
-	document.getElementById("text").innerHTML = "<p style='margin-left:5%'><strong>" + photoID + "</strong><span style='margin-left:20%;'><a href='" + addr + "'>Go back to Wiki.</a><br /></p><img style='" + dimension + ":50" + mp + ";min-" + dimension + ":400px;margin:5%;' src='" + imgPath + "'>";
+	document.getElementById("text").innerHTML = "<p style='margin-left:5%'><strong>" + photoID + "</strong><span style='margin-left:20%;'>" + "<br /></p><img style='" + dimension + ":50" + mp + ";min-" + dimension + ":400px;margin:5%;' src='" + imgPath + "'>";
     }
     chatReload = window.setInterval( xmlhttpGet, 5000 );
 };

@@ -36,10 +36,10 @@ var oscEmmiter = udp.createSocket("udp4");
 
 var oscListener = udp.createSocket("udp4", function(buf, rinfo) {
     var msg = osc.fromBuffer(buf);
-    console.log("OSC message received: " + msg.address + " | " +   msg.args[0].value + ": " + msg.args[1].value);
+    console.log("OSC message received: " + msg.address + " | " +   msg.args[0].value + ", " + msg.args[1].value);
     // *** create a chat entry from OSC messages with address "chatPost"
     if (msg.address == "/chatPost") {
-	pbChat.post( msg.args[1].value, msg.args[2].value );
+	pbChat.post( msg.args[0].value, msg.args[1].value );
 	pbChat.display();
     }
 });

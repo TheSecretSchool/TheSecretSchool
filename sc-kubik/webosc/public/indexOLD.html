@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/style2.css">
+  
+  <title>The Secret School</title>
+  <script src="js/jquery.min.js"></script>
+
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Surf">
+  <meta name="format-detection" content="telephone=no">
+</head>
+
+<body>
+  
+  <header id="header">
+    <div class="container-fluid">
+      <div id="logo">
+        <h1>
+          <a href="/">
+            The<span style="color:grey;">Secret</span>School
+          </a>
+        </h1>
+      </div>
+      <div id="menu-icon"><img src="menu.png" alt="="></div>
+      <nav id="top-nav">
+        <ul>
+          <li><a href="about.html" target="mainFrame">Home</a></li>
+          <li><a href="http://192.168.77.1:8686" target="mainFrame">PirateBox</a></li>
+          <li><a href="tw.html" target="mainFrame">SecretSchool Wiki</a></li>
+	</ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="content">
+    <iframe name="mainFrame" style="width:100%; height:100vh;" src="about.html"></iframe>
+  </section>
+
+  <script>
+
+    $('#menu-icon').click(function() {
+        
+        $('#top-nav').slideToggle();
+    });
+
+
+    $('#top-nav a').click(function() {
+        if ($('#top-nav').is(':visible')
+        && $('#menu-icon').is(':visible')) {
+            $('#top-nav').slideUp();
+            
+        }
+    });
+
+
+    $(window).resize(function() {
+        if ($('#menu-icon').is(':visible')) {
+            $('#top-nav').hide();
+        } else {
+            $('#top-nav').show();
+        }
+    });
+  </script>
+  
+</body>
+
+</html>
